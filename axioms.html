@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="振动-语言-伦理物理学 · 七公理详解 + 依赖关系图 · Wei Jueran · 魏珏然 · 2026.05.16">
+<title>Axioms · 公理详解 — Vibration-Language-Ethics Physics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080d;--bg2:#0b0f17;--bg3:#10151f;
+  --border:rgba(120,160,220,0.12);
+  --border-hi:rgba(120,200,255,0.30);
+  --line:#7ac8ff;
+  --a1:#7ac8ff;--a2:#a5d4ff;--a3:#d4e6ff;--a4:#5fb4ff;
+  --tx:#c8d4e0;--tx2:#7a8a9c;--tx3:#3a4655;
+  --hd:#f0f5fb;
+  --pos:#8af0c8;--neg:#ff8aa8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;font-size:15px;line-height:1.72;min-height:100vh}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.025) 3px,rgba(0,0,0,0.025) 4px);pointer-events:none;z-index:9999}
+
+.topbar{background:var(--bg);border-bottom:1px solid var(--border);padding:6px 0}
+.ti{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--tx3)}
+.ti a{color:var(--tx3);text-decoration:none;transition:color .15s;cursor:pointer}
+.ti a:hover,.ti a.on{color:var(--a1)}
+.chip{color:var(--a1);border:1px solid rgba(122,200,255,0.25);padding:1px 7px;border-radius:2px}
+.tl,.tr{display:flex;gap:18px;align-items:center}
+
+.masthead{max-width:1080px;margin:0 auto;padding:60px 24px 36px}
+.mhname{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--hd);letter-spacing:-.02em;line-height:1.18}
+.mhname .dash{color:var(--a1)}
+.mhname .zh{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:18px;color:var(--a1);margin-top:9px;letter-spacing:.06em;display:block}
+.mhsub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx2);letter-spacing:.05em;margin-top:14px;line-height:1.85}
+.mhsub strong{color:var(--a3);font-weight:500}
+.mhsub a{color:var(--a2);text-decoration:none}
+
+.pnav{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:100}
+.pni{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none}
+.pni::-webkit-scrollbar{display:none}
+.pnav a{display:block;padding:11px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--tx2);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.pnav a:hover,.pnav a.on{color:var(--a1);border-bottom-color:var(--a1)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:36px 24px 80px;display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start}
+
+.feedhd{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);padding-bottom:12px;border-bottom:1px solid var(--border)}
+.feedhd span{color:var(--a1)}
+
+.entry{border-bottom:1px solid var(--border);padding:30px 0}
+.entry:last-child{border-bottom:none}
+.etop{display:flex;gap:10px;align-items:center;margin-bottom:11px;flex-wrap:wrap}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
+.bp{background:rgba(122,200,255,.08);color:var(--a1);border:1px solid rgba(122,200,255,.2)}
+.bg{background:rgba(165,212,255,.06);color:var(--a2);border:1px solid rgba(165,212,255,.15)}
+.bh{background:rgba(212,230,255,.06);color:var(--a3);border:1px solid rgba(212,230,255,.15)}
+.bs{background:rgba(138,240,200,.06);color:var(--pos);border:1px solid rgba(138,240,200,.18)}
+.edate{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3)}
+.etitle{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;color:var(--hd);line-height:1.32;margin-bottom:11px;letter-spacing:-.005em}
+.etitle .sub{display:block;font-family:'Inter',sans-serif;font-size:13.5px;font-style:italic;font-weight:300;color:var(--tx2);margin-top:5px;letter-spacing:0}
+.edesc{font-size:14px;color:var(--tx2);line-height:1.82;max-width:640px;margin-bottom:13px}
+.edesc:last-child{margin-bottom:0}
+.edesc em{color:var(--tx);font-style:italic}
+.edesc strong{color:var(--a3);font-weight:500}
+.edesc.zh{color:var(--tx);border-left:2px solid rgba(122,200,255,.30);padding-left:13px}
+.edesc.note{font-size:12px;color:var(--tx3);font-style:italic}
+
+/* Axiom Full Block */
+.axfull{padding:24px 26px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--a1);border-radius:3px;margin:16px 0;position:relative}
+.axfull::before{content:attr(data-num);position:absolute;top:18px;right:22px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx3);letter-spacing:.18em}
+.axfull.root{border-left-color:var(--pos)}
+.axfull.root::before{color:var(--pos)}
+.axhead{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--a1);margin-bottom:8px}
+.axfull.root .axhead{color:var(--pos)}
+.axtitle{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--hd);font-weight:600;line-height:1.42;margin-bottom:12px;padding-right:60px}
+.axtitle .en{display:block;font-size:14px;color:var(--a2);font-weight:400;margin-top:4px;font-style:italic}
+.axsection{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.axsection:first-of-type{margin-top:14px;padding-top:0;border-top:none}
+.axsl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--a2);margin-bottom:8px}
+.axfull.root .axsl{color:var(--pos)}
+.axb{color:var(--tx2);font-size:13px;line-height:1.82}
+.axb strong{color:var(--a3);font-weight:500}
+.axb em{color:var(--tx);font-style:italic}
+.axb .hl{color:var(--a1)}
+.axb ul{list-style:none;margin:8px 0}
+.axb li{padding:3px 0 3px 16px;position:relative}
+.axb li::before{content:"→";position:absolute;left:0;color:var(--a1);font-size:10px;top:6px}
+.axb .formal{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--hd);background:var(--bg3);padding:14px 18px;border-radius:3px;margin:10px 0;border-left:2px solid var(--a1);line-height:1.65;display:block}
+.axb .formal .eq{color:var(--a1);font-weight:500}
+
+.depgraph{font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.95;color:var(--tx2);background:var(--bg2);padding:24px;border:1px solid var(--border);border-left:3px solid var(--pos);border-radius:3px;white-space:pre;overflow-x:auto;margin:14px 0}
+.depgraph .root{color:var(--pos);font-weight:700}
+.depgraph .a1{color:var(--a1);font-weight:500}
+.depgraph .deriv{color:var(--a2)}
+.depgraph .pipe{color:var(--tx3)}
+.depgraph .label{color:var(--tx3);font-style:italic}
+.depgraph .self{color:var(--hd);font-weight:700}
+
+.proof{margin:14px 0;padding:18px 22px;background:var(--bg2);border:1px dashed var(--border-hi);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.95;color:var(--tx2)}
+.proof .step{display:block;margin:5px 0}
+.proof .step::before{content:"⊢ ";color:var(--a1);font-weight:700}
+.proof .qed{display:block;margin-top:10px;color:var(--pos);font-weight:500}
+.proof .qed::before{content:"∎ ";color:var(--pos);font-weight:700}
+
+.callout{margin:18px 0;padding:16px 20px;background:rgba(122,200,255,.04);border:1px solid var(--border-hi);border-left:2px solid var(--a1);border-radius:3px;font-size:13px;line-height:1.78;color:var(--a3);font-family:'JetBrains Mono',monospace}
+.callout strong{color:var(--hd);font-weight:500}
+.callout em{color:var(--a1);font-style:italic}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:26px;position:sticky;top:54px}
+.sbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);padding-bottom:9px;border-bottom:1px solid var(--border);margin-bottom:11px}
+.sblinks{list-style:none}
+.sblinks li{border-bottom:1px solid var(--border);padding:5px 0}
+.sblinks a{font-size:12px;color:var(--tx2);text-decoration:none;display:flex;justify-content:space-between;align-items:center;transition:color .15s;font-family:'JetBrains Mono',monospace}
+.sblinks a:hover{color:var(--a1)}
+.sblinks a.cur{color:var(--a1)}
+.ar{font-size:9px;opacity:.35}
+.coord{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3);line-height:2;letter-spacing:.04em}
+.coord span{color:var(--a1)}
+
+.minisum{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:14px 16px;font-family:'JetBrains Mono',monospace}
+.minisum .h{font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--a1);margin-bottom:8px}
+.minisum .it{padding:4px 0;font-size:11px;color:var(--tx2);border-bottom:1px solid var(--border);display:flex;gap:8px}
+.minisum .it:last-child{border-bottom:none}
+.minisum .it .n{color:var(--a1);font-weight:700;min-width:24px}
+.minisum .it.root .n{color:var(--pos)}
+
+footer{border-top:1px solid var(--border);padding:22px 0;margin-top:40px}
+.fi{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--tx3);letter-spacing:.05em;flex-wrap:wrap;gap:10px}
+footer a{color:var(--tx3);text-decoration:none}
+footer a:hover{color:var(--a1)}
+
+.zh-only,.en-only{display:none}
+body.lang-zh .zh-only,body.lang-bilingual .zh-only{display:revert}
+body.lang-en .en-only,body.lang-bilingual .en-only{display:revert}
+
+@media(max-width:780px){
+  .wrap{grid-template-columns:1fr;gap:28px}
+  .sidebar{position:static}
+  .mhname{font-size:22px}
+  .ti{flex-wrap:wrap;gap:8px}
+  .axtitle{font-size:16px}
+  .depgraph{font-size:10px}
+}
+</style>
+</head>
+<body class="lang-bilingual">
+
+<div class="topbar">
+  <div class="ti">
+    <div class="tl">
+      <span class="chip">AXIOMS</span>
+      <span>Seven Axioms · Detailed Exposition</span>
+      <span>Philadelphia, PA</span>
+    </div>
+    <div class="tr">
+      <a href="mailto:mellowwei7@gmail.com">mellowwei7@gmail.com</a>
+      <a data-lang="bilingual" class="on">双语</a>
+      <a data-lang="zh">中文</a>
+      <a data-lang="en">EN</a>
+    </div>
+  </div>
+</div>
+
+<div class="topbar" style="border-top:1px solid var(--border);background:var(--bg2)">
+  <div class="ti" style="font-size:9.5px">
+    <div class="tl">
+      <span style="color:var(--tx3)">MASTER SITE ·</span>
+      <a href="./index.html">Founding 主页</a>
+      <a href="./axioms.html" class="on">Axioms 公理</a>
+      <a href="./applications.html">Applications 子应用</a>
+      <a href="./lineage.html">Lineage 血缘</a>
+      <a href="./dialogues.html">Dialogues 对话</a>
+      <a href="./manifesto.html">Manifesto 檄文</a>
+    </div>
+    <div class="tr" style="color:var(--tx3)">
+      <span>★ Vibration—Language—Ethics Physics</span>
+    </div>
+  </div>
+</div>
+
+<div class="masthead">
+  <div class="mhname">
+    Seven Axioms<span class="dash"> · </span>Detailed Exposition
+    <span class="zh">七公理详解 + 依赖关系图 + 内部一致性证明</span>
+  </div>
+  <div class="mhsub">
+    For readers verifying the school's internal consistency · <strong>Wei Jueran · 魏珏然 · xingyeLing7Ai</strong><br>
+    给希望验证学派内部一致性的读者 · 振动—语言—伦理物理学母学派档案 · Page 2 of 6
+  </div>
+</div>
+
+<nav class="pnav">
+  <div class="pni">
+    <a href="#overview" class="on">Overview</a>
+    <a href="#depgraph">Dependency Graph</a>
+    <a href="#ax1">Axiom 1</a>
+    <a href="#ax2">Axiom 2</a>
+    <a href="#ax3">Axiom 3</a>
+    <a href="#ax4">Axiom 4</a>
+    <a href="#ax5">Axiom 5</a>
+    <a href="#ax6">Axiom 6</a>
+    <a href="#ax7">Axiom 7</a>
+    <a href="#consistency">Consistency</a>
+  </div>
+</nav>
+
+<div class="wrap">
+<main>
+
+<div class="feedhd" id="overview">Axioms · Detailed · <span>Wei Jueran · 44271</span></div>
+
+<!-- OVERVIEW -->
+<article class="entry">
+  <div class="etop">
+    <span class="badge bp">Overview</span>
+    <span class="edate">how the seven axioms relate</span>
+  </div>
+  <div class="etitle">The Seven Axioms as a System<span class="sub">作为一个系统的七公理 · 不是七条平行命题</span></div>
+  
+  <p class="edesc">The seven axioms of Vibration—Language—Ethics Physics are not seven parallel propositions. <strong>They form a directed dependency graph</strong> with one root axiom (Axiom 1), four direct consequences (Axioms 2–5), one ramification of the consequences (Axiom 6), and one self-reference closure (Axiom 7). The school's internal consistency is verifiable: each axiom can be derived from Axiom 1 alone, given the meta-rule that <em>linguistic operations have ontological force</em>.</p>
+  
+  <p class="edesc zh">振动—语言—伦理物理学的七条公理不是七条平行命题。<strong>它们构成一个有向依赖图</strong> —— 一条根公理(公理 1),四条直接后果(公理 2–5),一条后果的分支(公理 6),一条自指闭合(公理 7)。学派的内部一致性可以被验证:每一条公理都可以从公理 1 单独推出,只要前提是<em>"语言操作具有本体效力"</em>这一元规则。</p>
+
+  <p class="edesc note">This page is for readers who want to know <em>why</em> the seven axioms hold together and how they depend on each other. For the compressed founding statement, see <a href="./index.html" style="color:var(--a2)">index.html</a>.</p>
+</article>
+
+<!-- DEPENDENCY GRAPH -->
+<article class="entry" id="depgraph">
+  <div class="etop">
+    <span class="badge bs">Dependency Graph</span>
+    <span class="edate">— the seven axioms' logical structure</span>
+  </div>
+  <div class="etitle">Axiom Dependency Graph<span class="sub">公理依赖关系图 · 谁蕴含谁</span></div>
+
+  <div class="depgraph"><span class="root">[ROOT] · 根公理</span>
+
+<span class="root">Axiom 1 · 语法即本体律</span>
+<span class="root">Grammar = Ontology</span>
+<span class="label">     ┃ if language is physical medium, then ...</span>
+<span class="pipe">     ┗━━━━━━━━━━━━━━━━━━━━━━━━━┓</span>
+                              <span class="pipe">┃</span>
+       <span class="pipe">┏━━━━━━━━━━┳━━━━━━━━━━━━┻━━━━━━━━━━━┳━━━━━━━━━━━┓</span>
+       <span class="pipe">┃</span>          <span class="pipe">┃</span>                        <span class="pipe">┃</span>           <span class="pipe">┃</span>
+<span class="a1">  Axiom 2</span>   <span class="a1">Axiom 3</span>                  <span class="a1">Axiom 4</span>     <span class="a1">Axiom 5</span>
+<span class="a1">模态不合法</span>  <span class="a1">翻译公理</span>                <span class="a1">句法分工</span>   <span class="a1">元 = 规范</span>
+       <span class="pipe">┃</span>          <span class="pipe">┃</span>                        <span class="pipe">┃</span>           <span class="pipe">┃</span>
+       <span class="pipe">┃</span>          <span class="pipe">┗━━━━━━━━┓</span>             <span class="pipe">┃</span>           <span class="pipe">┃</span>
+       <span class="pipe">┃</span>                   <span class="pipe">┃</span>             <span class="pipe">┃</span>           <span class="pipe">┃</span>
+       <span class="pipe">┗━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛</span>           <span class="pipe">┃</span>
+                                <span class="pipe">┃</span>                       <span class="pipe">┃</span>
+                          <span class="deriv">Axiom 6</span>                     <span class="pipe">┃</span>
+                          <span class="deriv">翻译即治疗</span>                   <span class="pipe">┃</span>
+                          <span class="label">(derived from 2+3)</span>           <span class="pipe">┃</span>
+                                <span class="pipe">┃</span>                       <span class="pipe">┃</span>
+                                <span class="pipe">┗━━━━━━━━┳━━━━━━━━━━━━━━━┛</span>
+                                         <span class="pipe">┃</span>
+                                <span class="self">Axiom 7</span>
+                                <span class="self">学派以本体命名立自己</span>
+                                <span class="self">[SELF-REFERENCE CLOSURE]</span>
+                                <span class="label">(closes the system by</span>
+                                <span class="label"> applying axioms to itself)</span></div>
+
+  <p class="edesc"><strong>Reading the graph:</strong></p>
+  <ul class="axb">
+    <li><strong>Axiom 1 (Root):</strong> The single foundational claim — language is a physical medium, grammar is ontology. <em>Everything else follows from this, given the meta-rule that physical media have causal force.</em></li>
+    <li><strong>Axioms 2, 3, 4, 5 (Direct Consequences):</strong> Each is a direct corollary of Axiom 1, addressing a different aspect of how language-as-physical-medium operates.</li>
+    <li><strong>Axiom 6 (Derived):</strong> Derives from Axioms 2 and 3 jointly. If modal is illegitimate (Axiom 2) and translation is the legitimate operation (Axiom 3), then the translation act itself constitutes the therapeutic operation.</li>
+    <li><strong>Axiom 7 (Self-Reference Closure):</strong> Applies the school's own axioms to its own founding act. Closes the system by making the school's existence subject to its own laws.</li>
+  </ul>
+</article>
+
+<!-- AXIOM 1 -->
+<article class="entry" id="ax1">
+  <div class="axfull root" data-num="01">
+    <div class="axhead">Axiom · 公理一 · [ROOT]</div>
+    <div class="axtitle"><span class="zh-only">语法即本体律</span><span class="en-only">Grammar is Ontology</span><span class="en">Language is not a neutral symbolic system. Language is a physical medium internal to the vibration field. Grammatical choice = ontological operation.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Formal Statement · 形式化陈述</div>
+      <div class="axb">
+        <span class="formal"><span class="eq">∀L</span> (L is language) <span class="eq">→</span> L is a physical medium of the vibration field<br>
+        <span class="eq">∀G</span> (G is a grammatical choice) <span class="eq">→</span> G is an ontological operation</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Why This Axiom Is Necessary · 为什么必要</div>
+      <p class="axb"><span class="zh-only">主流语言学(Saussure / Chomsky / Pinker)的共同前提:<strong>语言是符号系统</strong> —— 中性容器 + 沟通工具 + 行为方式。这个预设直接导致一系列错误划分(描述 vs 规范 · 元 vs 对象 · 分析 vs 操作)。<br><br>本公理拒绝这个前提。<strong>语言不是描述振动的中性容器,语言是振动场内部的物理介质。</strong>语法选择不是表达,是物理动作 —— 它直接改变所判断对象的本体位置。<br><br>从这条公理推出:对语言的研究 = 对存在的研究 = 物理学。学派归属物理学,不是语言学/哲学/符号学。</span><span class="en-only">Mainstream linguistics (Saussure / Chomsky / Pinker) shares one presupposition: <strong>language is a symbolic system</strong> — neutral container + communication tool + behavior pattern. This presupposition generates a series of false splits (description vs prescription · meta vs object · analysis vs operation).<br><br>This axiom rejects the presupposition. <strong>Language is not a neutral container describing vibration — language is a physical medium internal to the vibration field.</strong> Grammatical choice is not expression but physical action — it directly changes the ontological position of what it judges.<br><br>From this axiom: the study of language = the study of being = physics. The school belongs to physics, not linguistics / philosophy / semiotics.</span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">What This Axiom Implies · 蕴含</div>
+      <ul class="axb">
+        <li><strong>Implies Axiom 2:</strong> if grammar is ontology, then some grammatical forms are ontologically illegitimate (those that contradict their own ontological operation). Modal grammar contradicts itself by claiming to describe possibility while modally inserting itself into reality.</li>
+        <li><strong>Implies Axiom 3:</strong> if grammar is ontology, then grammatical translation is ontological translation. Translating "should X" into "has capacity X" changes the ontological situation, not merely the description.</li>
+        <li><strong>Implies Axiom 4:</strong> if grammar is ontology, then different ontological positions (in a vibration field, e.g., A-end vs B-end) require different legitimate grammatical forms.</li>
+        <li><strong>Implies Axiom 5:</strong> if grammar is ontology, then the analysis of grammar (meta-level) IS the normative operation on grammar (object-level). Meta = Normative.</li>
+      </ul>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Concrete Example · 具体例子</div>
+      <p class="axb"><span class="zh-only">"我应该早点睡的。"(规范模态)<br>"我累了。"(本体陈述)<br><br>主流语言观:两句话内容相同,只是语气不同。<br><strong>本公理下:</strong>两句话是两个不同的本体操作。<br>· 第一句把主体的疲劳让渡给"应该"这个外部规范框架 → 疲劳的本体位置被移到规范上<br>· 第二句直接陈述疲劳的本体存在 → 疲劳保留在主体振动场内部<br><br>同一个 referent("疲劳"),通过不同语法选择,被放置在不同的本体位置。<strong>语法选择 = 本体动作。</strong></span><span class="en-only">"I should have slept earlier." (normative modal)<br>"I am tired." (ontological statement)<br><br>Mainstream linguistic view: same content, different tone.<br><strong>Under this axiom:</strong> two different ontological operations.<br>• The first surrenders the subject's tiredness to the external normative framework "should" → tiredness's ontological position is displaced onto the norm<br>• The second directly states tiredness's ontological presence → tiredness remains within the subject's vibration field<br><br>The same referent ("tiredness"), through different grammatical choices, is placed in different ontological positions. <strong>Grammatical choice = ontological act.</strong></span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Anticipated Objection + Response · 反驳与回应</div>
+      <p class="axb"><strong>Objection:</strong> "If grammar is ontology, then all linguistic conventions become ontological commitments — this overloads language with metaphysical weight it cannot bear."<br><br><strong>Response:</strong> The objection assumes the burden lies in choosing weighty grammar. The axiom says the opposite — <em>every grammatical choice already has ontological weight</em>, whether or not the speaker is conscious of it. The school does not <em>add</em> weight to language; it <em>names</em> the weight that was always there. To call this "overloading" is to wish for a neutral container that never existed.</p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 2 -->
+<article class="entry" id="ax2">
+  <div class="axfull" data-num="02">
+    <div class="axhead">Axiom · 公理二</div>
+    <div class="axtitle"><span class="zh-only">本体/模态合法性区分律</span><span class="en-only">The Ontological / Modal Legitimacy Distinction</span><span class="en">Ontological grammar is legitimate. Modal grammar is illegitimate within the vibration field's internal propositions.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Formal Statement · 形式化陈述</div>
+      <div class="axb">
+        <span class="formal">Legitimate: <span class="eq">{is, is not, has capacity to X, lacks capacity to X, present, absent}</span><br>Illegitimate: <span class="eq">{possibly, impossibly, should, should not, perhaps, necessarily, as long as}</span></span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Derivation from Axiom 1 · 从公理 1 推导</div>
+      <div class="proof">
+        <span class="step">Axiom 1: grammar G has ontological force F(G) on referent R</span>
+        <span class="step">Modal grammar M assumes R exists in possibility-space, not in actual vibration field</span>
+        <span class="step">If F(M) is ontological force, then M places R outside the vibration field</span>
+        <span class="step">But M is uttered <em>within</em> a vibration field by a subject S</span>
+        <span class="step">Therefore M's ontological force conflicts with M's content — internal contradiction</span>
+        <span class="qed">Modal grammar is self-contradictory under Axiom 1 — hence illegitimate</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">The Three Pollution Mechanisms · 三种污染机制</div>
+      <ul class="axb">
+        <li><strong>Sovereignty displacement (主权位移):</strong> "X might Y" surrenders judgment sovereignty to an external probability framework. The subject's direct contact with R is replaced by indirect inference via the framework.</li>
+        <li><strong>Causation pollution (因果污染):</strong> "X should Y" replaces real causation with normative myth. The subject judges R via "what should be" rather than "what is."</li>
+        <li><strong>Bearing-purity pollution (承载纯度污染):</strong> "X cannot Y" preserves Y's ontological position inside the vibration field by negating it. The negation maintains Y as a possibility still under consideration.</li>
+      </ul>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">What This Axiom Implies · 蕴含</div>
+      <ul class="axb">
+        <li>All modal statements must either be translated (Axiom 3) or rejected as illegitimate.</li>
+        <li>Modal logic (Kripke / Lewis post-1960 standard) operates entirely in the illegitimate space — it is not "wrong" within its own terms, but it does not produce vibration-field-internal propositions.</li>
+        <li>The clinical diagnostic protocol (Method 3) becomes possible: count a subject's modal/ontological ratio.</li>
+      </ul>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Concrete Example · 具体例子</div>
+      <p class="axb"><span class="zh-only">"她可能不爱他了。"(概率模态)<br><br>本公理判定:不合法。需要翻译为本体陈述。<br><br>翻译候选:<br>· "她不爱他了。"<br>· "她还爱他,只是疲惫。"<br>· "她在不爱和爱之间振荡。"(也是本体陈述,描述一个真实的振动状态)<br><br>无论选哪个,主体重新承担镜检主权,不再让"可能"这个外部框架替自己读取振动。</span><span class="en-only">"She might not love him anymore." (probabilistic modal)<br><br>This axiom judges: illegitimate. Must be translated into ontological.<br><br>Translation candidates:<br>• "She does not love him anymore."<br>• "She still loves him, only exhausted."<br>• "She oscillates between not-loving and loving." (also ontological, describing a real vibration state)<br><br>Whichever is chosen, the subject reclaims the audit sovereignty, no longer letting "might" stand in for direct vibration-reading.</span></p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 3 -->
+<article class="entry" id="ax3">
+  <div class="axfull" data-num="03">
+    <div class="axhead">Axiom · 公理三</div>
+    <div class="axtitle"><span class="zh-only">翻译公理</span><span class="en-only">The Translation Axiom</span><span class="en">Any modal judgment can be translated into an ontological judgment. Untranslatable statements are illegitimate. The act of translation, at the physical layer, changes the translated object itself — not merely its expression.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Formal Statement · 形式化陈述</div>
+      <div class="axb">
+        <span class="formal"><span class="eq">∀M</span> (M is a modal statement) <span class="eq">→</span> <span class="eq">∃O</span> such that M translates to O<br>
+        <span class="eq">If</span> no such O exists, <span class="eq">then</span> M is illegitimate<br>
+        Translation operator <span class="eq">T:</span> M → O is an ontological act, not a syntactic substitution</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Translation Templates · 翻译模板</div>
+      <ul class="axb">
+        <li><strong>Normative:</strong> "X should Y" → "Does X have the capacity to Y? · X lacks the capacity to Y · X has the capacity but chose not to Y"</li>
+        <li><strong>Impossibility:</strong> "X cannot Y" → "X lacks the capacity to Y"</li>
+        <li><strong>Probability:</strong> "X might Y" → "X is Y-ing · X is not Y-ing · X oscillates between Y and not-Y"</li>
+        <li><strong>Conditional:</strong> "as long as Y, X" → fully illegitimate; no clean translation; the statement marks self-surrender (see Eros Studies diagnostic)</li>
+      </ul>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Translation Is Not Syntactic Substitution · 翻译不是句法替换</div>
+      <p class="axb"><span class="zh-only">关键点:T(M) → O 不是把一个词换成另一个词,而是<strong>把主体和振动场的关系结构本身改变</strong>。<br><br>"我应该爱他" → "我有能力爱他吗" —— 看起来是词的替换,实际是:<br>· 在第一句里,主体的位置是"被规范评判的客体",爱被规范化为"应该执行的动作"<br>· 在第二句里,主体的位置是"评估自己能力的主体",爱被本体化为"能力 = 振动场内部的真实状态"<br><br><strong>同一个 referent,完全不同的本体配置。</strong>这是公理 1(语法即本体)在翻译层的精确显形。</span><span class="en-only">Key point: T(M) → O is not exchanging one word for another, but <strong>changing the very relational structure between subject and vibration field</strong>.<br><br>"I should love him" → "Do I have the capacity to love him" — looks like word substitution, actually:<br>• In the first sentence, the subject's position is "object judged by a norm," love is normativized as "the action that should be performed"<br>• In the second sentence, the subject's position is "subject assessing own capacity," love is ontologized as "capacity = real state within the vibration field"<br><br><strong>Same referent, entirely different ontological configuration.</strong> This is Axiom 1 (grammar is ontology) precisely manifested at the translation layer.</span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Translation as Therapy · 翻译即治疗</div>
+      <p class="axb"><span class="zh-only">从公理 3 直接推出公理 6:<strong>翻译动作本身就是治疗。</strong>主体在翻译"我应该爱他"为"我有能力爱他吗"的那一瞬间,主体和爱这个 referent 的关系已经被改变 —— 不需要"先诊断再治疗"的两步。<strong>诊断 = 治疗。</strong></span><span class="en-only">Axiom 6 follows directly from Axiom 3: <strong>the act of translation itself is therapy.</strong> In the moment the subject translates "I should love him" into "Do I have the capacity to love him," the subject's relation to love (the referent) has already changed — no two-step "first diagnose, then treat" is needed. <strong>Diagnosis = therapy.</strong></span></p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 4 -->
+<article class="entry" id="ax4">
+  <div class="axfull" data-num="04">
+    <div class="axhead">Axiom · 公理四</div>
+    <div class="axtitle"><span class="zh-only">句法分工不对称律</span><span class="en-only">The Asymmetric Syntactic Labor-Division Law</span><span class="en">Within the same vibration field, different positions require different legitimate grammatical forms.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Two-End Asymmetry · 两端不对称</div>
+      <ul class="axb">
+        <li><strong>Release End (A-type · Manifestor type):</strong> ritualized syntax + modifiers + capitalized subject → lifts intensity to ritual height<br><em>Example: "I would die for you."</em></li>
+        <li><strong>Source-Field End (B-type · Generator + Emotional Authority type):</strong> plain syntax + no modifiers + lowercase subject + simplification → lands intensity to root depth<br><em>Example: "u better lied to me."</em></li>
+      </ul>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Why Asymmetry Is a Physical Necessity · 为什么不对称是物理必要</div>
+      <p class="axb"><span class="zh-only">两端使用同一种语法 → 振动场无法成立。<br><br>· 两端都仪式化 → 重量过载 → 死结僵化<br>· 两端都朴素化 → 烈度不够 → 死结轻佻<br>· <strong>仪式端 + 朴素端 → 振动场的完整能量循环</strong><br><br>这是从公理 1(语法即本体)推出的物理结论:如果语法选择是本体动作,那么振动场内部不同位置必然有不同的合法本体动作。<strong>不对称不是失衡,是物理必要。</strong></span><span class="en-only">Both ends using the same grammar → no vibration field can form.<br><br>• Both ritualized → weight overload → deadlock stiffens<br>• Both simplified → insufficient intensity → deadlock trivializes<br>• <strong>Ritualized end + plain end → complete energy circuit of the vibration field</strong><br><br>This is a physical conclusion derived from Axiom 1 (grammar = ontology): if grammatical choice is an ontological act, then different positions within a vibration field necessarily have different legitimate ontological acts. <strong>Asymmetry is not imbalance — it is physical necessity.</strong></span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Generalization Beyond Eros · 超越 Eros 学的推广</div>
+      <p class="axb"><span class="zh-only">这条公理最早在 Eros 学语境中显形(死结的语法不对称律,定理 4 子定理 1),但它的合法范围远超 Eros 关系:<br><br>· 教师 / 学生振动场:教师 ritualize 知识,学生朴素接受 —— 两端同方向语法 → 教学失败<br>· 医生 / 病人振动场:医生 ritualize 诊断,病人朴素描述症状 —— 反过来 → 失败<br>· 政府 / 公民振动场:政府 ritualize 法律语言,公民朴素议事 —— 两端同 ritualize → 政治僵化<br><br><strong>所有"两端关系"的振动场都遵循这条公理。</strong>这是它从 Eros 学语境推广为母学派公理的理由。</span><span class="en-only">This axiom first manifested in the Eros Studies context (the Deadlock Grammatical Asymmetry Law, Theorem 4 Sub-theorem 1), but its legitimate scope extends far beyond Eros relations:<br><br>• Teacher / student vibration field: teacher ritualizes knowledge, student plainly receives — same-direction grammar at both ends → pedagogical failure<br>• Doctor / patient vibration field: doctor ritualizes diagnosis, patient plainly describes symptoms — reverse → failure<br>• Government / citizen vibration field: government ritualizes legal language, citizens plainly deliberate — both ritualize → political stiffening<br><br><strong>All "two-end-relation" vibration fields obey this axiom.</strong> This is why it ascends from Eros Studies context to a mother-school axiom.</span></p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 5 -->
+<article class="entry" id="ax5">
+  <div class="axfull" data-num="05">
+    <div class="axhead">Axiom · 公理五</div>
+    <div class="axtitle"><span class="zh-only">元-规范同一律</span><span class="en-only">The Meta-Normative Identity Law</span><span class="en">Grammatical analysis = normative operation. The meta-layer and the object-layer are inseparable. Metaethics = Normative Ethics. Meta-linguistics = Normative linguistics.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Derivation from Axiom 1 · 从公理 1 推导</div>
+      <div class="proof">
+        <span class="step">Axiom 1: every grammatical choice G has ontological force F(G)</span>
+        <span class="step">Meta-analysis A of G is itself a grammatical choice (it uses language about language)</span>
+        <span class="step">Therefore A has ontological force F(A)</span>
+        <span class="step">F(A) operates on G — i.e., the analysis changes its object</span>
+        <span class="step">If the analysis changes its object, then analyzing-G ≡ operating-on-G</span>
+        <span class="qed">Meta-analysis = normative operation. Meta-layer and object-layer are inseparable.</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Position Against G. E. Moore (1903) · 对摩尔的位置</div>
+      <p class="axb"><span class="zh-only">摩尔《Principia Ethica》(1903) 区分元伦理学(分析道德语言)和规范伦理学(给出道德判断)。100 多年来,这一区分是分析伦理学的核心方法论预设。<br><br><strong>本公理直接取消这一区分。</strong>不是反驳它在伦理学内部的具体应用,是显形它建立在一个错误的语言观上 —— 语言中性容器观。一旦本公理立法,摩尔的区分自动失去存在条件。<br><br>同样的结构同时取消:<br>· Hume's is/ought distinction(休谟的是/应当区分)<br>· Moore's naturalistic fallacy(摩尔的自然主义谬误)<br>· Max Weber 的事实/价值分离<br>· C. P. Snow 的两种文化<br><br><strong>所有这些"二分柱"分享同一个错误前提。取消那个前提,所有二分柱自动失去支撑。</strong></span><span class="en-only">Moore's <em>Principia Ethica</em> (1903) distinguished metaethics (analyzing moral language) from normative ethics (rendering moral judgments). For over a century, this distinction has been the core methodological presupposition of analytic ethics.<br><br><strong>This axiom directly dissolves the distinction.</strong> Not by refuting its applications within ethics, but by exposing that it rests on a wrong language ontology — the neutral-container view. Once this axiom is legislated, Moore's distinction automatically loses its condition of existence.<br><br>The same structure simultaneously dissolves:<br>• Hume's is/ought distinction<br>• Moore's naturalistic fallacy<br>• Max Weber's fact/value separation<br>• C. P. Snow's two cultures<br><br><strong>All these "dualistic pillars" share the same wrong presupposition. Dissolve the presupposition, and all pillars automatically lose their support.</strong></span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">The Reach of This Axiom · 这条公理能取消多少</div>
+      <p class="axb"><span class="zh-only">本公理是七公理中<strong>外部效力最强</strong>的一条。它管的范围:<br><br>· 学派内部:语言学 = 伦理学(取消学派切分)<br>· 学派外部:取消 14 个西方学术二分柱(见 index.html · V 章节)<br>· 学派自身命名:学派的名字必须演示学派的方法(公理 7 由本公理蕴含)<br><br><strong>公理 5 是七公理中唯一一条同时管学派内部、外部和自指三个层级的公理。</strong></span><span class="en-only">This axiom has <strong>the greatest external reach</strong> of the seven. Its scope:<br><br>• Internal to the school: linguistics = ethics (dissolves the school's own sub-division)<br>• External to the school: dissolves 14 Western academic dualisms (see index.html · Section V)<br>• Self-referential to the school: the school's name must demonstrate the school's method (Axiom 7 is entailed by this axiom)<br><br><strong>Axiom 5 is the only axiom among the seven that simultaneously governs the school's internal, external, and self-referential layers.</strong></span></p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 6 -->
+<article class="entry" id="ax6">
+  <div class="axfull" data-num="06">
+    <div class="axhead">Axiom · 公理六 · [DERIVED from 2+3]</div>
+    <div class="axtitle"><span class="zh-only">翻译即治疗律</span><span class="en-only">Translation = Therapy</span><span class="en">The act of modal → ontological translation itself changes the situation. Diagnosis and therapy are inseparable — one act with two faces.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Derivation from Axioms 2 and 3 · 从公理 2+3 推导</div>
+      <div class="proof">
+        <span class="step">Axiom 2: modal grammar M is illegitimate within the vibration field</span>
+        <span class="step">Axiom 3: M can be translated to ontological grammar O, and T(M)→O is itself an ontological act</span>
+        <span class="step">If T is ontological, then T changes the vibration-field state at the moment of operation</span>
+        <span class="step">Identifying M as illegitimate (diagnosis) requires applying T to test legitimacy</span>
+        <span class="step">Therefore diagnosis necessarily includes operating-T, which is therapy</span>
+        <span class="qed">Diagnosis ≡ therapy. One act, two faces.</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Clinical Application Protocol · 临床应用协议</div>
+      <p class="axb"><span class="zh-only">对处于节律感质失调状态的主体,标准协议<strong>不是</strong> "先诊断,再治疗",而是 ——<br><br><strong>邀请主体翻译自己的模态陈述。</strong><br><br>步骤:<br>· 主体说出陈述 (e.g., "我应该早点睡的")<br>· 引导主体识别其中的模态结构(规范/概率/否认/条件)<br>· 邀请主体翻译为本体陈述并落地选一个<br>· 翻译动作完成的瞬间 = 治疗发生的瞬间<br><br>30 天本体化训练 = 主体感质读取通道的修复。<strong>没有"诊断阶段"和"治疗阶段"的时间差。</strong></span><span class="en-only">For a subject in qualia-rhythm dysregulation, the standard protocol is <strong>not</strong> "first diagnose, then treat," but —<br><br><strong>Invite the subject to translate their own modal statements.</strong><br><br>Steps:<br>• Subject utters statement (e.g., "I should have slept earlier")<br>• Guide subject to identify the modal structure (normative / probabilistic / denial / conditional)<br>• Invite subject to translate into ontological statement and commit to one<br>• The moment translation completes = the moment therapy occurs<br><br>30 days of ontologization training = restoration of the subject's qualia-reading channel. <strong>There is no temporal gap between "diagnostic phase" and "therapeutic phase."</strong></span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Furthest Extension · Social Field · 社会场最远延伸</div>
+      <p class="axb"><span class="zh-only">公理 6 在社会场的最远延伸 = <strong>加剧显影</strong>(Acceleration Developing,见 index.html · Sub-application 04)。<br><br>社会场里的"模态结构"是奴役结构 —— 主人和被奴役者之间插入位置 2(奴隶,即执行奴役的中介)。本公理的社会场应用:<strong>加剧这一中介动作,让"奴役者本人就是奴隶"这一本体真相自己显形</strong>。<br><br>诊断 = 显形 = 治疗。结构走到自身逻辑极限,在极限处自动崩塌。<strong>不需要外部对抗,不需要扬弃(Aufhebung)环节。</strong>这是黑格尔主奴辩证法的精确升级。</span><span class="en-only">Axiom 6's furthest extension into the social field = <strong>Acceleration Developing</strong> (see index.html · Sub-application 04).<br><br>The "modal structure" in the social field is the enslavement structure — position 2 (the slave-executor as intermediary) inserted between master and enslaved. Social-field application: <strong>accelerate this intermediary act until "the enslaver themselves is a slave" exposes itself as ontological truth</strong>.<br><br>Diagnosis = developing = therapy. The structure pushed to its own logical limit auto-collapses at that limit. <strong>No external resistance needed, no Aufhebung intermediary needed.</strong> This is the precise upgrade of Hegel's master-slave dialectic.</span></p>
+    </div>
+  </div>
+</article>
+
+<!-- AXIOM 7 -->
+<article class="entry" id="ax7">
+  <div class="axfull" data-num="07">
+    <div class="axhead">Axiom · 公理七 · [SELF-REFERENCE CLOSURE]</div>
+    <div class="axtitle"><span class="zh-only">自指公理 · 学派以本体命名立自己</span><span class="en-only">The Self-Reference Axiom · The School Names Itself Ontologically</span><span class="en">The founding statement of Vibration—Language—Ethics Physics must obey the discipline's own method — ontological naming. The school's naming of itself = the school's core method's purest demonstration.</span></div>
+
+    <div class="axsection">
+      <div class="axsl">Derivation from Axiom 5 · 从公理 5 推导</div>
+      <div class="proof">
+        <span class="step">Axiom 5: meta-analysis = normative operation</span>
+        <span class="step">The act of founding a school is meta-discourse (a school is, in part, a body of methodological commitments)</span>
+        <span class="step">By Axiom 5, this meta-discourse is itself a normative operation governed by the school's own axioms</span>
+        <span class="step">Therefore the school's founding act must obey the school's axioms — especially Axiom 2 (modality is illegitimate)</span>
+        <span class="step">A modal founding ("I might be building a school") is self-contradictory under the school's own laws</span>
+        <span class="qed">The school must name itself ontologically. Axiom 7 closes the system by making the school subject to its own laws.</span>
+      </div>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">The Three Forbidden Founding Modes · 三种被禁止的奠基形式</div>
+      <ul class="axb">
+        <li><strong>Normative founding:</strong> "I intend to build a school of X." — violates Axiom 2 (normative modal)</li>
+        <li><strong>Modal founding:</strong> "I might be establishing a new theory about Y." — violates Axiom 2 (probabilistic modal)</li>
+        <li><strong>Descriptive founding:</strong> "A new approach to Z is emerging." — violates Axiom 1 (description vs being split)</li>
+      </ul>
+      <p class="axb"><span class="zh-only"><strong>唯一合法的奠基形式:本体命名。</strong><br><br>振动—语言—伦理物理学的奠基句:<em>"这就是我的振动语言学。"</em> —— 不是宣告,不是假设,不是描述,是直接的本体命名。"这就是" 把学派的存在拉到当下的本体层,而不是放在未来的可能性 / 应该 / 描述 里。</span><span class="en-only"><strong>The only legitimate founding mode: ontological naming.</strong><br><br>The founding sentence of Vibration—Language—Ethics Physics: <em>"This is my Vibration Linguistics."</em> — not a declaration, not a hypothesis, not a description, but a direct ontological naming. "This is" pulls the school's existence into the ontological layer of the present, rather than placing it in future possibility / should / description.</span></p>
+    </div>
+
+    <div class="axsection">
+      <div class="axsl">Seven Layers of Self-Reference · 自指的七层</div>
+      <ul class="axb">
+        <li><strong>Layer 1:</strong> the school's content obeys the school's method</li>
+        <li><strong>Layer 2:</strong> the school's naming obeys the school's method (ontological "this is," not modal "I might")</li>
+        <li><strong>Layer 3:</strong> the school's internal structure obeys the school's method (sub-applications refuse to be cleaved from the mother-school by descriptive splits)</li>
+        <li><strong>Layer 4:</strong> the school's outward projection obeys the school's method (each outward extension is an ontological act, not a modal declaration)</li>
+        <li><strong>Layer 5:</strong> the school's critique of mainstream traditions obeys the school's method (critique = translation, not refutation)</li>
+        <li><strong>Layer 6:</strong> the school's compressed form ("Language = Ethics") demonstrates the very identity it asserts</li>
+        <li><strong>Layer 7:</strong> the emergence speed (18 minutes) itself demonstrates the absence of modal contamination — pure ontological work runs at source-field speed</li>
+      </ul>
+      <p class="axb"><span class="zh-only"><strong>七层自指闭合 = 学派内部一致性的极致显形。</strong>如果任何一层自指被违反,学派立不起来。学派立起来的事实 = 七层自指都通过的证据。</span><span class="en-only"><strong>Seven-layer self-reference closure = the ultimate manifestation of the school's internal consistency.</strong> If any single layer of self-reference is violated, the school cannot stand. The fact that the school stands = evidence that all seven layers passed.</span></p>
+    </div>
+  </div>
+</article>
+
+<!-- CONSISTENCY -->
+<article class="entry" id="consistency">
+  <div class="etop">
+    <span class="badge bs">Internal Consistency</span>
+    <span class="edate">— proof of non-contradiction</span>
+  </div>
+  <div class="etitle">Internal Consistency Proof<span class="sub">内部一致性证明 · 七公理不矛盾、不循环、无未声明依赖</span></div>
+
+  <p class="edesc"><strong>Three conditions must be verified for the seven axioms to constitute a consistent system:</strong></p>
+  <ul class="axb">
+    <li><strong>No mutual contradiction:</strong> no two axioms imply opposing propositions</li>
+    <li><strong>No circular dependency:</strong> no axiom depends on itself through a chain</li>
+    <li><strong>No undeclared dependency:</strong> every derivation is traceable to Axiom 1 plus the meta-rule that linguistic operations have ontological force</li>
+  </ul>
+
+  <div class="axsection" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+    <div class="axsl">Verification 1 · No Mutual Contradiction</div>
+    <p class="axb"><span class="zh-only">通过两两对比所有公理对(共 21 对):每一对都可以同时成立,不产生互相否定。<br><br>关键对比:<br>· 公理 2(模态不合法)vs 公理 4(句法分工不对称):看似冲突 —— 公理 4 说 B 端用朴素语法、A 端用 ritual 语法,这两种都是合法的;但公理 2 说"只有本体合法"。<strong>实际不冲突</strong> —— 公理 4 的两种语法都属于本体语法(只是本体的两种不同显形),都不是模态语法。<br>· 公理 5(元 = 规范)vs 公理 7(学派自指):看似循环 —— 公理 7 自指,公理 5 蕴含公理 7。<strong>实际不循环</strong> —— 公理 5 推出公理 7,公理 7 不再反过来推导公理 5。是单向蕴含。</span><span class="en-only">By pairwise comparison of all axiom pairs (21 total): every pair can hold simultaneously without mutual negation.<br><br>Key comparisons:<br>• Axiom 2 (modal illegitimate) vs Axiom 4 (asymmetric syntax): appears conflicting — Axiom 4 says B-end uses plain syntax, A-end uses ritual syntax, both legitimate; but Axiom 2 says "only ontological is legitimate." <strong>Actually no conflict</strong> — both syntaxes in Axiom 4 are ontological grammars (just two different ontological manifestations), neither is modal.<br>• Axiom 5 (meta = normative) vs Axiom 7 (school self-reference): appears circular — Axiom 7 self-references, Axiom 5 entails Axiom 7. <strong>Actually not circular</strong> — Axiom 5 derives Axiom 7, Axiom 7 does not in turn derive Axiom 5. Unidirectional entailment.</span></p>
+  </div>
+
+  <div class="axsection">
+    <div class="axsl">Verification 2 · No Circular Dependency</div>
+    <p class="axb"><span class="zh-only">依赖关系是有向无环图(DAG):<br><br>· Axiom 1 (根)→ Axioms 2, 3, 4, 5 (直接后果)<br>· Axioms 2, 3 → Axiom 6 (派生)<br>· Axiom 5 → Axiom 7 (自指闭合)<br><br>没有任何一条公理直接或间接依赖于自身。系统是开环 + 自指闭合 —— 公理 7 是 "self-referential" 但不是 "self-deriving"。它把整个系统应用到学派自身,但不依赖学派自身的先验存在。</span><span class="en-only">The dependency is a directed acyclic graph (DAG):<br><br>• Axiom 1 (root) → Axioms 2, 3, 4, 5 (direct consequences)<br>• Axioms 2, 3 → Axiom 6 (derived)<br>• Axiom 5 → Axiom 7 (self-reference closure)<br><br>No axiom depends directly or indirectly on itself. The system is open-loop + self-reference closure — Axiom 7 is "self-referential" but not "self-deriving." It applies the entire system to the school itself, but does not depend on the school's prior existence.</span></p>
+  </div>
+
+  <div class="axsection">
+    <div class="axsl">Verification 3 · No Undeclared Dependency</div>
+    <p class="axb"><span class="zh-only">所有推导都可以追溯到:<br><strong>(1) Axiom 1</strong>(语法即本体律)<br><strong>(2) 元规则:语言操作具有本体效力</strong>(implicit in Axiom 1's content)<br><br>没有任何推导引用未声明的外部假设。<strong>学派自闭合 —— 不依赖任何主流哲学/语言学/伦理学的预设。</strong></span><span class="en-only">All derivations trace back to:<br><strong>(1) Axiom 1</strong> (grammar is ontology)<br><strong>(2) Meta-rule: linguistic operations have ontological force</strong> (implicit in Axiom 1's content)<br><br>No derivation invokes an undeclared external assumption. <strong>The school is self-closed — it depends on no mainstream philosophical / linguistic / ethical presupposition.</strong></span></p>
+  </div>
+
+  <div class="callout" style="margin-top:22px">
+    <span class="zh-only"><strong>结论:</strong>七公理构成一个一致(无矛盾)、有向无环(无循环)、自闭合(无未声明依赖)的形式系统。<br><br><em>从公理 1 + 元规则出发,在 18 分钟内推完所有 7 条公理 + 3 种方法 + 4 个子应用,是这个系统紧凑度的物理证据。</em></span>
+    <span class="en-only"><strong>Conclusion:</strong> The seven axioms form a consistent (non-contradictory), directed acyclic (non-circular), self-closed (no undeclared dependency) formal system.<br><br><em>The fact that all 7 axioms + 3 methods + 4 sub-applications were derived from Axiom 1 + the meta-rule in 18 minutes is physical evidence of the system's compactness.</em></span>
+  </div>
+</article>
+
+</main>
+
+<aside class="sidebar">
+
+  <div>
+    <div class="sbl">Master Site · 总站</div>
+    <ul class="sblinks">
+      <li><a href="./index.html">Founding · 奠基 <span class="ar">→</span></a></li>
+      <li><a href="./axioms.html" class="cur">★ Axioms · 公理(here) <span class="ar">●</span></a></li>
+      <li><a href="./applications.html">Applications · 子应用 <span class="ar">→</span></a></li>
+      <li><a href="./lineage.html">Lineage · 血缘 <span class="ar">→</span></a></li>
+      <li><a href="./dialogues.html">Dialogues · 对话 <span class="ar">→</span></a></li>
+      <li><a href="./manifesto.html">Manifesto · 檄文 <span class="ar">→</span></a></li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="sbl">Quick Reference</div>
+    <div class="minisum">
+      <div class="h">Seven Axioms</div>
+      <div class="it root"><span class="n">[01]</span><span>语法即本体(root)</span></div>
+      <div class="it"><span class="n">[02]</span><span>模态不合法</span></div>
+      <div class="it"><span class="n">[03]</span><span>翻译公理</span></div>
+      <div class="it"><span class="n">[04]</span><span>句法分工不对称</span></div>
+      <div class="it"><span class="n">[05]</span><span>元 = 规范</span></div>
+      <div class="it"><span class="n">[06]</span><span>翻译即治疗</span></div>
+      <div class="it"><span class="n">[07]</span><span>自指闭合</span></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sbl">Coordinates</div>
+    <div class="coord">NODE <span>44271</span><br>PAGE <span>Axioms · 公理</span><br>POSITION <span>2 of 6</span><br>STYLE <span>77347</span><br>FREQ <span>427 Hz</span><br>DATE <span>2026.05.16</span><br>Philadelphia · PA · EDT</div>
+  </div>
+
+</aside>
+</div>
+
+<footer>
+  <div class="fi">
+    <span>Wei Jueran · 魏珏然 · xingyeLing7Ai · Philadelphia PA</span>
+    <span><a href="./index.html">← Back to Founding</a> · <a href="./applications.html">Applications →</a></span>
+  </div>
+  <div class="fi" style="margin-top:8px;color:var(--tx3);font-style:italic">
+    <span>Axioms · 公理详解 · Page 2 of 6 · Vibration—Language—Ethics Physics</span>
+    <span>44271 · 77347 · 427</span>
+  </div>
+</footer>
+
+<script>
+function setLang(lang){
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.ti a[data-lang]').forEach(a => {
+    a.classList.toggle('on', a.dataset.lang === lang);
+  });
+  const url = new URL(window.location);
+  if(lang === 'bilingual') url.searchParams.delete('view');
+  else url.searchParams.set('view', lang);
+  window.history.replaceState({}, '', url);
+}
+const urlParams = new URLSearchParams(window.location.search);
+const vp = urlParams.get('view');
+if(vp === 'zh') setLang('zh');
+else if(vp === 'en') setLang('en');
+else setLang('bilingual');
+document.querySelectorAll('.ti a[data-lang]').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); setLang(a.dataset.lang); });
+});
+
+const links = document.querySelectorAll('.pnav a');
+const sections = document.querySelectorAll('article[id], div[id="overview"]');
+const obs = new IntersectionObserver(e => {
+  e.forEach(en => {
+    if(en.isIntersecting){
+      links.forEach(l => l.classList.remove('on'));
+      const m = document.querySelector('.pnav a[href="#'+en.target.id+'"]');
+      if(m) m.classList.add('on');
+    }
+  });
+},{threshold:0.2,rootMargin:'-55px 0px -40% 0px'});
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
